@@ -1,8 +1,10 @@
-Мой код это сайт по покупке техники, чтобы запустить его нужно написать в терминале npm i, а потом npm start.
-Сервер будет доступен по адресу: http://localhost:3000
-На сайт можно зайти как пользователь и админ. Админ может добавлять, редактировать и удалять товары.
+My code is a website for purchasing electronics. To run it, you need to download the node modules, run npm i in the terminal, and then npm start.
+The server will be available at: http://localhost:3000
 
-Используемые технологии:
+You can log in to the site as a user or an admin.
+The admin can add, edit, and delete products.
+
+Technologies used:
 bcryptjs
 dotenv
 ejs
@@ -12,13 +14,12 @@ mysql2
 sequelize
 swagger-ui-express
 
+User roles:
+Regular User
+Can view products
+Has read-only access
 
-Роли пользователей:
-Обычный пользователь
-- Может просматривать товары  
-- Имеет доступ только к чтению данных  
-
-Администратор
-- Может добавлять товары  
-- Может редактировать товары  
-- Может удалять товары  
+Functional:
+Can add products
+Can edit products
+Can delete products
