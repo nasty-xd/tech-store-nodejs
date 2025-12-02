@@ -33,29 +33,53 @@ async function initDb() {
         ]);
     }
 
-    // Начальные товары: добавим 6, если их меньше 6
-    const productsCount = await Product.count();
-    if (productsCount < 6) {
-        const needed = 6 - productsCount;
-        const baseDesc = 'Sample product description for demo purposes.';
-        const pic = '/img/pic.png';
-        const category = 'technology';
-        const existing = await Product.findAll({ attributes: ['name'] });
-        const existingNames = new Set(existing.map((p) => p.name));
+   
 
-        const items = [];
-        for (let i = 1; i <= 6; i++) {
-            const name = `Demo Produst ${i}`;
-            if (!existingNames.has(name)) {
-                items.push({ name, desc: baseDesc, price: (i * 10). toFixed(2), pic, category });
-            }
-        }
-        if (items.length) {
-            await Product.bulkCreate(items);
+
+const productsCount = await Product.count();
+if (productsCount < 6) {
+    const needed = 6 - productsCount;
+    const baseDesc = [
+        'A fast and reliable computer for work and entertainment.',
+        'Immersive audio for everyday use.',
+        'Portable power for work and play.',
+        'Precision control at your fingertips.',
+        'Smart, fast, and connected.',
+        'Lightweight device for work and fun.'
+    ];
+    const pics = [
+        '/img/computer.jpg',
+        '/img/headphones.jpg',
+        '/img/laptop.jpg',
+        '/img/mouse.jpg',
+        '/img/phone.jpg',
+        '/img/tablet.jpg'
+    ];
+    const categories = ['technology', 'gadgets', 'home', 'office', 'sports', 'outdoors'];
+
+    const existing = await Product.findAll({ attributes: ['name'] });
+    const existingNames = new Set(existing.map((p) => p.name));
+
+    const items = [];
+    for (let i = 1; i <= 6; i++) {
+        const name = `Demo Product ${i}`;
+        if (!existingNames.has(name)) {
+            items.push({
+                name,
+                desc: baseDesc[i - 1],                  // разное описание
+                price: (Math.random() * 100 + 10).toFixed(2),  // случайная цена
+                pic: pics[i - 1],                       // разные картинки
+                category: categories[i - 1]             // разные категории
+            });
         }
     }
 
-    return sequelize;
+    if (items.length) {
+        await Product.bulkCreate(items);
+    }
+}
+
+return sequelize;
 }
 
 function getModels() {
