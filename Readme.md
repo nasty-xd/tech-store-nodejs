@@ -8,6 +8,7 @@ Technologies used:
 bcryptjs, dotenv, ejs, express, express-session, mysql2, sequelize, swagger-ui-express
 
 User roles:
+
 Regular User:
 Can view products, Has read-only access
 
