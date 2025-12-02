@@ -5,22 +5,7 @@ You can log in to the site as a user or an admin.
 The admin can add, edit, and delete products.
 
 Technologies used:
-
-bcryptjs
-
-dotenv
-
-ejs
-
-express
-
-express-session
-
-mysql2
-
-sequelize
-
-swagger-ui-express
+bcryptjs, dotenv, ejs, express, express-session, mysql2, sequelize, swagger-ui-express
 
 User roles:
 Regular User
