@@ -5,21 +5,33 @@ You can log in to the site as a user or an admin.
 The admin can add, edit, and delete products.
 
 Technologies used:
+
 bcryptjs
+
 dotenv
+
 ejs
+
 express
+
 express-session
+
 mysql2
+
 sequelize
+
 swagger-ui-express
 
 User roles:
 Regular User
+
 Can view products
+
 Has read-only access
 
 Functional:
 Can add products
+
 Can edit products
+
 Can delete products
