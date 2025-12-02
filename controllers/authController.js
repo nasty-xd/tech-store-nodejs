@@ -1,11 +1,11 @@
-// Контроллер авторизации: вход/выход пользователей
+// Authorization controller: user login/logout
 
 const bcrypt = require('bcryptjs');
 const { getModels } = require('../models');
 
-// Get /login - форма логина 
+// Get /login - login form
 async function getLogin(req, res) {
-    //Если уже вошел - отправим на главную
+    // If already logged in, redirect to the main page
     if (req.session.user) return res.redirect('/');
     const showError = Boolean(req.query.error);
     res.render('login', { title: 'Enter', showError });
