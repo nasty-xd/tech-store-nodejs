@@ -11,29 +11,29 @@ async function getLogin(req, res) {
     res.render('login', { title: 'Enter', showError });
 }
 
-// POST /login - обработка логина
+// POST /login - login processing
 async function postLogin(req, res) {
     const { email, password } = req.body;
     const { User } = getModels();
 
-    // Ищем пользователя по email
+    //searching for a user by email
     const user = await User.findOne({ where: { email }});
     if (!user) {
         return res.redirect('/login?error=1');
     }
 
-    // Сверяем пароль
+    // checking the password
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) {
         return res.redirect('/login?error=1');
     }
 
-    // Успешный вход - сохраняем нужные поля в сессию
+    // successful login - saving the required fields in the session
     req.session.user = { id: user.id, name: user.name, email: user.email, rule: user.rule };
     res.redirect('/');
 }
 
-// POST /logout - выход
+// POST /logout 
 async function postLogout(req, res) {
     req.session.destroy(() => {
         res.redirect('/');
