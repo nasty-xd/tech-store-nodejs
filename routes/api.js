@@ -4,7 +4,7 @@ const router = express.Router();
 const { requireAdmin } = require('../middleware/auth');
 const api = require('../controllers/productApiController');
 
-// Чтение доступно всем, изменение - только админу
+// Reading is available to everyone, modification is admin-only
 router.get('/products', api.list);
 router.get('/products/:id', api.getOne);
 router.post('/products', requireAdmin, api.create);
