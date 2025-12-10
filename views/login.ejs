@@ -23,9 +23,9 @@
 
 <% if (showError) { %>
 <script>
-  // Всплывающее сообщение при неверном пароле/почте
+  // Popup message for incorrect password/email
   alert('Incorrect email or password. Please try again.');
-  // Фокус на поле пароля для повторного ввода
+  // Focus on the password field for re-entry
   document.addEventListener('DOMContentLoaded', () => {
     const pwd = document.getElementById('password');
     if (pwd) pwd.focus();
