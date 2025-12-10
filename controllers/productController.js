@@ -1,8 +1,8 @@
-// Контроллер для веб-части работы с товарами (страницы)
+// Controller for the web part of product management (pages)
 
 const { getModels } = require('../models');
 
-// Главная страница - список товаров
+// Home page - list of products
 async function listPage(req, res) {
     const { Product, Category } = getModels();
     const products = await Product.findAll({
@@ -13,15 +13,15 @@ async function listPage(req, res) {
 }
 
 
-// Форма сощдания товара (только админ)
+// Product creation form (admin only)
 async function newForm(req, res) {
     res.render('product_form', { title: 'New Produst', product: null });
 }
 
-// Создание товара
+// Creating a product
 async function create(req, res) {
     const { Product } = getModels();
-    // Принимаем адрес картинки из формы; по умолчанию используем тестовую
+    // Receiving the image URL from the form; using a default test image if none provided
     const { name, desc, price, category } = req.body;
     let { pic } = req.body;
     if (!pic || !pic.trim()) pic = '/img/pic.png';
@@ -29,7 +29,7 @@ async function create(req, res) {
     res.redirect('/');
 }
 
-// Форма редактирования
+// Edit form
 async function editForm(req, res) {
     const { Product } = getModels();
     const product = await Product.findByPk(req.params.id);
@@ -37,7 +37,7 @@ async function editForm(req, res) {
     res.render('product_form', { title: 'Edit Produst', product });
 }
 
-// Обновления товара
+// Updating the product
 async function update(req, res) {
     const { Product } = getModels();
     const { name, desc, price, category } = req.body;
@@ -49,7 +49,7 @@ async function update(req, res) {
     res.redirect('/');
 }
 
-//Удаление товара
+// Deleting the product
 async function remove(req, res) {
     const { Product } = getModels();
     const product = await Product.findByPk(req.params.id);
