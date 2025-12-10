@@ -1,4 +1,4 @@
-// Контроллер REST API для товаров
+// REST API controller for products
 
 const { getModels } = require('../models');
 
