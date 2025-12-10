@@ -12,16 +12,16 @@ const swaggerDocument = require('./swagger.json');
 
 const app = express();
 
-// Настройка движка шаблонов и статики
+// Setting up the template engine and static files
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Встроенные парсеты JSON и URL-форм
+// Built-in JSON and URL-encoded parsers
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Настройка сессий
+// Session setup
 app.use(
     session({
         secret: process.env.SESSION_SECRET || 'dev_secret',
@@ -31,16 +31,16 @@ app.use(
     })
 );
 
-// Прокидываем текущего пользователя в шаблоны
+// Passing the current user to templates
 app.use((req, res, next) => {
       res.locals.currentUser = req.session.user || null;
         next();
 });
 
-// Маршруты
+// Routes
 app.use('/', webRoutes);
 app.use('/api', apiRoutes);
-// Swagger UI по адресу /api-docs и сам JSON по /swagger.json
+// Swagger UI at /api-docs and the JSON at /swagger.json
 app.use(
     '/api-docs',
     swaggerUi.serve,
@@ -49,7 +49,7 @@ app.use(
      swaggerOptions: {
         persistAuthorization: true,
         requestInterceptor: function (req) {
-            // Включаем куки сессии для вызовов из Swagger UI
+            // Enable session cookies for calls from Swagger UI
             req.credentials = 'include';
             return req;
         }
@@ -59,13 +59,13 @@ app.use(
 );
 app.get('/swagger.json', (req, res) => res.json(swaggerDocument));
 
-// Инициализация БД и запуск сервера
+// Database initialization and server startup
 const port = process.env.PORT || 3000;
 
-// initDB создаёт БД, таблицы и тестовые данные
+// initDB creates the database, tables, and test data
 initDb() 
     .then(() => {
-        // Запуск сервера – пользователи запускают его сам через npm start
+        // Server start – users run it themselves via npm start
         app.listen(port, () => {
             console.log(`MyShop listening on http://localhost:${port}`);
         });
