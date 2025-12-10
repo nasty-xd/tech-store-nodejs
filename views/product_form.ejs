@@ -33,10 +33,10 @@
     </div>
     <div class="col-12">
       <label class="form-label" for="pic">Picture URL or path</label>
-      <!-- Текстовое поле для адреса картинки. По умолчанию /img/pic.png -->
+      <!-- Text field for the image URL. Default is /img/pic.png -->
       <input class="form-control" id="pic" name="pic" placeholder="/img/pic.png or https://..." value="<%= product ? product.pic : '/img/pic.png' %>" />
       <div class="form-text">Stored as address in DB. Use absolute URL or app-relative path.</div>
-      <!-- Превью картинки для удобства администратора -->
+      <!-- Image preview for admin convenience -->
       <div class="d-flex align-items-center gap-3 mt-2">
         <img id="picPreview" src="<%= product ? product.pic : '/img/pic.png' %>" width="80" height="80" class="rounded object-fit-cover border" alt="pic" />
         <span class="text-muted small">Preview</span>
@@ -49,7 +49,7 @@
   </div>
 </form>
 <script>
-  // Обновляем превью при вводе адреса картинки
+  // Update the preview when entering the image URL
   const picInput = document.getElementById('pic');
   const picPreview = document.getElementById('picPreview');
   if (picInput && picPreview) {
