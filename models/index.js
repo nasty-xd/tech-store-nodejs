@@ -1,4 +1,4 @@
-// Инициализация Sequelize, определение моделей и начальное наполнение БД
+// Initializing Sequelize, defining models, and populating the database initially
 
 const bcrypt = require('bcryptjs');
 const { createSequelize } = require('../config/database');
@@ -11,19 +11,19 @@ let User;
 let Product;
 
 async function initDb() {
-    // Создаем инстанм Sequelize и модели 
+    // Creating a Sequelize instance and models
     sequelize = await createSequelize();
 
     User = defineUser(sequelize);
     Product = defineProduct(sequelize);
 
-    // Синхронизируемые модели (создаем таблицы при отстствии)
+    // Synchronizable models (create tables if they don’t exist)
     await sequelize.sync();
 
-    // Начальные данные: два пользователя при отсутствии
+    // Initial data: two users if they don’t exist
     const userCount = await User.count();
     if (userCount === 0) {
-        // Шифруем пароли
+        // Hashing passwords
         const adminPass = await bcrypt.hash('123', 10);
         const userPass = await bcrypt.hash('321', 10);
 
@@ -66,10 +66,10 @@ if (productsCount < 6) {
         if (!existingNames.has(name)) {
             items.push({
                 name,
-                desc: baseDesc[i - 1],                  // разное описание
-                price: (Math.random() * 100 + 10).toFixed(2),  // случайная цена
-                pic: pics[i - 1],                       // разные картинки
-                category: categories[i - 1]             // разные категории
+                desc: baseDesc[i - 1],                
+                price: (Math.random() * 100 + 10).toFixed(2), 
+                pic: pics[i - 1],                   
+                category: categories[i - 1]            
             });
         }
     }
